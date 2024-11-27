@@ -11,7 +11,7 @@ class SubcategorySerializer(ModelSerializer):
 
 
 class CategorySerializer(ModelSerializer):
-    subcategories = SerializerMethodField()
+    subcategories = SerializerMethodField(read_only=True)
 
     def get_subcategories(self, category):
         return [sub.title for sub in Subcategory.objects.filter(category=category)]
@@ -22,7 +22,7 @@ class CategorySerializer(ModelSerializer):
 
 
 class ProductSerializer(ModelSerializer):
-    category = CategorySerializer()
+    category = CategorySerializer(read_only=True)
 
     class Meta:
         model = Product

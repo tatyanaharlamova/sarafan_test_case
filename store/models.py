@@ -1,6 +1,6 @@
 from django.db import models
 
-from users.models import User
+from config import settings
 
 
 class Category(models.Model):
@@ -104,10 +104,10 @@ class Cart(models.Model):
         verbose_name='Товар'
     )
     owner = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='users',
-        verbose_name='Пользователь',
+        verbose_name="Владелец",
+        null=True, blank=True,
     )
 
     class Meta:
